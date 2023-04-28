@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package grpc_testing.authority;
+
+option go_package = "github.com/johnsiilver/medium/grpc_testing/proto";
+
+service Authority {
+    // ProcessExporter instructs the Processor to process some data from an exporter and
+    // stream the results back.
+    rpc Servers(ServersReq) returns (stream ServerMsg) {}
+}
+   
+message ServersReq {
+    string name_filter_re = 1;
+    repeated string datacenter_filter = 2;
+}
+   
+message ServerMsg {
+    string name = 1;
+}
